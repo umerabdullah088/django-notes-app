@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}My Notes{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 1900px;">
+
+    <!-- CREATE NOTE FORM -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+
+            <h4 class="mb-3">Create a Note</h4>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        class="form-control"
+                        placeholder="Enter note title"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Note</label>
+                    <textarea
+                        name="body"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Write your note here..."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Attachment (optional)</label>
+                    <input
+                        type="file"
+                        name="attachment"
+                        class="form-control"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Add Note
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- NOTES LIST -->
+<form method="get" class="mb-4">
+    <input
+        type="text"
+        name="q"
+        class="form-control"
+        placeholder="Search notes..."
+        value="{{ query }}"
+    >
+</form>
+
+
+    <div class="row">
+        {% for note in notes %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ note.title }}</h5>
+                    <p class="card-text">{{ note.body|linebreaksbr }}</p>
+                    <small class="text-muted">
+    Created on {{ note.created }}
+</small>
+                </div>
+
+                {% if note.attachment %}
+                <div class="card-footer">
+                    <a href="{{ note.attachment.url }}" class="btn btn-sm btn-outline-secondary">
+                        View attachment
+                    </a>
+                </div>
+                {% endif %}
+                <div class="d-flex justify-content-between mt-3">
+    <a href="{% url 'note-edit' note.id %}" class="btn btn-sm btn-outline-primary">
+        Edit
+    </a>
+
+    <a href="{% url 'note-delete' note.id %}" class="btn btn-sm btn-outline-danger">
+        Delete
+    </a>
+</div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No notes yet.</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

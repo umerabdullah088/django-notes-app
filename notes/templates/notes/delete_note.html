@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Note{% endblock %}
+
+{% block content %}
+   <h3>Delete </h3><br>
+   <hr>
+  
+   <h2><b>{{note.title}}</b></h2> 
+   
+   <br><br>
+   
+   <form method = "post" action="{%url 'note-delete' note.id%}">
+    {%csrf_token%}
+    <a href="{%url 'note_list' %}"> GO Back
+    </a>
+    <br>
+    <button type ="submit">DELETE</button>
+   </form>
+  
+{% endblock %}

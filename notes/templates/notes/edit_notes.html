@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Edit Note{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 700px;">
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <h3 class="mb-4 text-center">Edit Note</h3>
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input
+                        type="text"
+                        name="title"
+                        class="form-control"
+                        value="{{ note.title }}"
+                        required
+                    >
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Note</label>
+                    <textarea
+                        name="body"
+                        class="form-control"
+                        rows="6"
+                        required
+                    >{{ note.body }}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Replace Attachment (optional)</label>
+                    <input
+                        type="file"
+                        name="attachment"
+                        class="form-control"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Update Note
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

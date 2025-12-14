@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Welcome | Notes App{% endblock %}
+
+{% block content %}
+<div class="landing">
+
+    <div class="landing-card">
+        <h1 class="logo">📝 Notes App</h1>
+        <p class="tagline">Simple. Secure. Your personal notes, anywhere.</p>
+
+        <div class="actions">
+            <a href="accounts/login/" class="btn primary">Log in</a>
+            <a href="accounts/signup/" class="btn secondary">Sign up</a>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .landing {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #6fb25e, #a8e063);
+        animation: bgFade 1.2s ease-in;
+    }
+
+    @keyframes bgFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .landing-card {
+        background: white;
+        padding: 50px 40px;
+        border-radius: 14px;
+        text-align: center;
+        width: 420px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        animation: slideUp 0.8s ease-out;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(40px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .logo {
+        margin: 0;
+        font-size: 36px;
+        color: #6fb25e;
+    }
+
+    .tagline {
+        margin: 15px 0 30px;
+        color: #555;
+        font-size: 16px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 12px 22px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .primary {
+        background: #6fb25e;
+        color: white;
+    }
+
+    .primary:hover {
+        background: #5aa14b;
+        transform: translateY(-2px);
+    }
+
+    .secondary {
+        border: 2px solid #6fb25e;
+        color: #6fb25e;
+    }
+
+    .secondary:hover {
+        background: #6fb25e;
+        color: white;
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
